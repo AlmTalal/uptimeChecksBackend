@@ -10,7 +10,7 @@ const uptimeCheckSchema = {
 
 const UptimeCheck = mongoose.model("Uptime Check", uptimeCheckSchema);
 
-function validateUptimeCheck() {
+function validateUptimeCheck(uptimeCheck) {
   const schema = Joi.object({
     checkedId: Joi.string().required(),
     checkedUrl: Joi.string(),
@@ -18,7 +18,7 @@ function validateUptimeCheck() {
     checkedStatus: Joi.number(),
   });
 
-  const { error } = schema.validate(req.body);
+  const { error } = schema.validate(uptimeCheck);
 
   if (!error) return;
   return error;
