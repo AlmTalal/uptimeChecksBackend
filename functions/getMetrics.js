@@ -3,7 +3,7 @@ const monitoring = require("@google-cloud/monitoring");
 // Create the projects authenitcation
 const { GoogleAuth } = require("google-auth-library");
 const auth = new GoogleAuth({
-  keyFile: "./GCPKey.json",
+  keyFile: "../GCPKey.json",
   scopes: ["https://www.googleapis.com/auth/cloud-platform"],
 });
 
