@@ -21,7 +21,10 @@ module.exports = (socket) => {
       await uptimeCheck.save();
       socket.emit("CreateUptimeCheckStatus", true);
     } catch (error) {
-      socket.emit("CreateUptimeCheckStatus", false);
+      socket.emit(
+        "CreateUptimeCheckStatus",
+        "Sorry, there was an error. Please retry"
+      );
     }
   });
 };
