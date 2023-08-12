@@ -18,7 +18,7 @@ module.exports = async (newMetrics) => {
       if (currentMetricStatus[0]) {
         const newMetricStatus = metric[1];
         //if the checkedStatus are not the same
-        if (currentMetricStatus[0].checkedStatus !== newMetricStatus) {
+        if (currentMetricStatus[0].checkedStatus != newMetricStatus) {
           //We update the DB instance
           await UptimeCheck.findOneAndUpdate(
             { checkedId: metric[0] },
