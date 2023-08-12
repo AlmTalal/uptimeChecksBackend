@@ -13,7 +13,7 @@ module.exports = (socket) => {
     //It tries to create an uptime check, if it's succesfull emits true else emits false
     try {
       const uptimeCheck = new UptimeCheck({
-        chekedUrl: newUptimeCheck.chekedUrl,
+        checkedUrl: newUptimeCheck.checkedUrl,
         checkedId: newUptimeCheck.checkedId,
         name: newUptimeCheck.name,
         checkedStatus: newUptimeCheck.checkedStatus,
