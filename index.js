@@ -30,14 +30,17 @@ const getAllUptimeChecks = require("./socketEvents/getUptimeChecks");
     let currentUptimeChecks = await getCurrentUptimeChecks();
     const newMetrics = await getMetrics();
     //Get the new uptime Checks and if there has been any updates
-    const [newUptimeCheck, changedUptimes] = await compareNewMetrics(
-      newMetrics
-    );
-    //If it is true
-    if (changedUptimes) {
-      //We Update the uptimeChecks
-      currentUptimeChecks = newUptimeCheck;
-      socketServer.emit("currentUptimeChecks", currentUptimeChecks);
+
+    if (newMetrics) {
+      const [newUptimeCheck, changedUptimes] = await compareNewMetrics(
+        newMetrics
+      );
+      //If it is true
+      if (changedUptimes) {
+        //We Update the uptimeChecks
+        currentUptimeChecks = newUptimeCheck;
+        socketServer.emit("currentUptimeChecks", currentUptimeChecks);
+      }
     }
   }, 60000);
 })();
