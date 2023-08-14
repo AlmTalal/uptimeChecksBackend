@@ -51,7 +51,7 @@ let currentUptimeChecks;
 socketServer.on("connection", async (socket) => {
   //If the server was down and a new user connects
   if (currentUptimeChecks == undefined) {
-    currentUptimeChecks = getCurrentUptimeChecks();
+    currentUptimeChecks = await getCurrentUptimeChecks();
   }
   //We emit the current Uptime Checks
   socket.emit("currentUptimeChecks", currentUptimeChecks);
