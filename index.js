@@ -49,7 +49,10 @@ let currentUptimeChecks;
 })();
 
 socketServer.on("connection", async (socket) => {
-  console.log("connected");
+  //If the server was down and a new user connects
+  if (currentUptimeChecks == undefined) {
+    currentUptimeChecks = getCurrentUptimeChecks();
+  }
   //We emit the current Uptime Checks
   socket.emit("currentUptimeChecks", currentUptimeChecks);
   //We call all the events handlers
