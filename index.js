@@ -24,16 +24,19 @@ const getAllUptimeChecks = require("./socketEvents/getUptimeChecks");
   }
 })();
 
+let currentUptimeChecks;
+
 (async () => {
   //every 60 seconds
   setInterval(async () => {
-    let currentUptimeChecks = await getCurrentUptimeChecks();
+    currentUptimeChecks = await getCurrentUptimeChecks();
     const newMetrics = await getMetrics();
     //Get the new uptime Checks and if there has been any updates
 
     if (newMetrics) {
       const [newUptimeCheck, changedUptimes] = await compareNewMetrics(
-        newMetrics
+        newMetrics,
+        currentUptimeChecks
       );
       //If it is true
       if (changedUptimes) {
@@ -46,14 +49,14 @@ const getAllUptimeChecks = require("./socketEvents/getUptimeChecks");
 })();
 
 socketServer.on("connection", async (socket) => {
+  console.log("connected");
   //We emit the current Uptime Checks
-  const currentUptimeChecks = await getCurrentUptimeChecks();
   socket.emit("currentUptimeChecks", currentUptimeChecks);
   //We call all the events handlers
   createUptimeCheck(socket);
   getAllUptimeChecks(socket);
 
-  //We disconnect the client
+  //We disconnect the client when he closes the page
   socket.on("disconnect", () => {
     socket.disconnect();
   });
