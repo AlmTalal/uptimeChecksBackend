@@ -16,7 +16,7 @@ const createUptimeCheck = require("./socketEvents/uptimeChecks/createUptimeCheck
 const getAllUptimeChecks = require("./socketEvents/uptimeChecks/getUptimeChecks");
 //User Events
 const auth = require("./socketEvents/users/login");
-
+const hasAuthorization = require("./socketEvents/users/authorization");
 //Connecting to mongoose
 (async () => {
   try {
@@ -63,6 +63,7 @@ socketServer.on("connection", async (socket) => {
   getAllUptimeChecks(socket);
   //User Events
   auth(socket);
+  hasAuthorization(socket);
 
   //We disconnect the client when he closes the page
   socket.on("disconnect", () => {
