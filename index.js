@@ -11,9 +11,11 @@ const getCurrentUptimeChecks = require("./functions/getCurrentUptimeChecks");
 const getMetrics = require("./functions/getMetrics");
 const compareNewMetrics = require("./functions/compareNewMetrics");
 
-//Socket events
-const createUptimeCheck = require("./socketEvents/createUptimeCheck");
-const getAllUptimeChecks = require("./socketEvents/getUptimeChecks");
+//UptimeCheck events
+const createUptimeCheck = require("./socketEvents/uptimeChecks/createUptimeCheck");
+const getAllUptimeChecks = require("./socketEvents/uptimeChecks/getUptimeChecks");
+//User Events
+const auth = require("./socketEvents/users/auth");
 
 //Connecting to mongoose
 (async () => {
@@ -55,9 +57,12 @@ socketServer.on("connection", async (socket) => {
   }
   //We emit the current Uptime Checks
   socket.emit("currentUptimeChecks", currentUptimeChecks);
-  //We call all the events handlers
+
+  //Uptime check events
   createUptimeCheck(socket);
   getAllUptimeChecks(socket);
+  //User Events
+  auth(socket);
 
   //We disconnect the client when he closes the page
   socket.on("disconnect", () => {
