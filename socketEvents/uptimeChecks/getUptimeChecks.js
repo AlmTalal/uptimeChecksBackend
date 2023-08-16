@@ -1,4 +1,4 @@
-const { UptimeCheck } = require("../models/uptimeCheck");
+const { UptimeCheck } = require("../../models/uptimeCheck");
 
 module.exports = (socket) => {
   socket.on("GetUptimeChecks", async () => {
