@@ -1,12 +1,12 @@
 const Joi = require("joi");
 const mongoose = require("mongoose");
 
-const uptimeCheckSchema = {
+const uptimeCheckSchema = new mongoose.Schema({
   checkedId: String,
   checkedUrl: String,
   name: String,
   checkedStatus: String,
-};
+});
 
 const UptimeCheck = mongoose.model("Uptime Check", uptimeCheckSchema);
 
