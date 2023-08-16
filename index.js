@@ -15,7 +15,7 @@ const compareNewMetrics = require("./functions/compareNewMetrics");
 const createUptimeCheck = require("./socketEvents/uptimeChecks/createUptimeCheck");
 const getAllUptimeChecks = require("./socketEvents/uptimeChecks/getUptimeChecks");
 //User Events
-const auth = require("./socketEvents/users/auth");
+const auth = require("./socketEvents/users/login");
 
 //Connecting to mongoose
 (async () => {
