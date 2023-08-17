@@ -55,8 +55,11 @@ socketServer.on("connection", async (socket) => {
   if (currentUptimeChecks == undefined) {
     currentUptimeChecks = await getCurrentUptimeChecks();
   }
-  //We emit the current Uptime Checks
-  socket.emit("currentUptimeChecks", currentUptimeChecks);
+
+  //We give the current Uptime Checks
+  socket.on("giveUptimeChecks", (callback) => {
+    callback(currentUptimeChecks);
+  });
 
   //Uptime check events
   createUptimeCheck(socket);
